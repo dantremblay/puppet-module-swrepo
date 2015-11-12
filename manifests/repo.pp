@@ -6,6 +6,7 @@ define swrepo::repo (
   $repotype,
   $baseurl,
   $enabled          = '1',
+  $ensure           = undef,
   $autorefresh      = undef,
   $gpgcheck         = undef,
   $gpgkey_keyid     = undef,
@@ -17,6 +18,8 @@ define swrepo::repo (
   $exclude          = undef,
   $proxy            = undef,
   $downcase_baseurl = false,
+  $distribution     = undef,
+  $components       = undef,
 ) {
 
   if $downcase_baseurl {
@@ -52,7 +55,14 @@ define swrepo::repo (
       }
     }
     'apt': {
-      notice('apt support coming')
+      aptrepo { $name:
+        ensure        => $ensure,
+        type          => $type,
+        baseurl       => $baseurl_real,
+        distribution  => $distribution,
+        components    => $components,
+      }
+
     }
     default: {
       fail("Invalid repotype ${repotype}. Supported repotypes are yum, zypper and apt.")

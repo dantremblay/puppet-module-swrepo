@@ -26,7 +26,7 @@ class swrepo (
       }
     }
     'Debian': {
-      fail('Debian not yet supported')
+      $default_repotype = 'apt'
     }
     default: {
       fail("Supported osfamilies are RedHat, Suse and Debian. Yours identified as <${::osfamily}>")

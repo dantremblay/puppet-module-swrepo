@@ -16,8 +16,9 @@ This module is built for use with Puppet 3.x and 4.x on the following OS familie
 * EL 5
 * Suse 11
 * Suse 12
+* Debian
 
-This module uses the custom types [zypprepo](https://github.com/deadpoint/puppet-zypprepo) and [rpmkey](https://github.com/stschulte/puppet-rpmkey).
+This module uses the custom types [zypprepo](https://github.com/deadpoint/puppet-zypprepo), [rpmkey](https://github.com/stschulte/puppet-rpmkey) and [aptrepo](https://github.com/jbouse/puppet-aptrepo).
 
 ===
 
@@ -106,7 +107,7 @@ Note: Suse only.
 
 type
 ----
-Note: Suse only.
+Note: Suse/Debian only. For Debian can be 'deb' or 'deb-src'.
 
 - *Default*: undef
 
@@ -134,3 +135,22 @@ Boolean to control whether or not `baseurl` should be converted to lowercase.
 
 - *Default*: false
 
+ensure
+------
+Either 'present' or 'absent'.  Note: Debian only
+
+- *Default*: undef
+
+distribution
+------------
+Which distribution this repository is for.  Can be either the release code name/alias (wheezy, jessie, stretch, sid) or the release class (oldstable, stable, testing, unstable) respectively.
+Note: Debian only
+
+- *Default*: undef
+
+components
+----------
+Either 'main', 'contrib' or 'non-free'.  See https://wiki.debian.org/SourcesList.
+Note: Debian only
+
+- *Default*: undef

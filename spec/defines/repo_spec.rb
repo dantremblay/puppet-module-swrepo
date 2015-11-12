@@ -230,4 +230,32 @@ describe 'swrepo::repo' do
       })
     }
   end
+
+  context 'APT repo' do
+    let(:title) { 'custom-repo' }
+    let(:params) {
+      {
+        :repotype     => 'apt',
+        :baseurl      => 'http://apt.server.tld/repo',
+        :ensure       = 'present',
+        :type         => 'deb',
+        :distribution => 'wheezy',
+        :components   => [ 'main', 'contrib' ],
+      }
+    }
+    let(:facts) {
+      { :osfamily => 'Debian', }
+    }
+
+    it {
+      should contain_aptrepo('custom-repo').with({
+        'name'          => 'custom-repo',
+        'baseurl'       => 'http://apt.server.tld/repo',
+        'ensure'        => 'present',
+        'type'          => 'deb',
+        'distribution'  => 'wheezy',
+        'components'    => [ 'main', 'contrib' ],
+      })
+    }
+  end
 end

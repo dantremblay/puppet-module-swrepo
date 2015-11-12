@@ -57,11 +57,7 @@ describe 'swrepo' do
       let :facts do
         { :osfamily => 'Debian' }
       end
-      it 'should fail' do
-        expect {
-          should contain_class('swrepo')
-        }.to raise_error(Puppet::Error,/Debian not yet supported/)
-      end
+      it should contain_class('swrepo') }
     end
 
     context "with unsupported osfamily" do
